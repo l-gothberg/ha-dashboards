@@ -4,13 +4,13 @@ header:
   show: true
   show_states: true
   colorize_states: true
-graph_span: 4h
+graph_span: 24h
 all_series_config:
   stroke_width: 2
   curve: smooth
   group_by:
     func: avg
-    duration: 10min
+    duration: 15min
 series:
   - entity: sensor.leo_s_office_airgradient_sensor_carbon_dioxide
     name: CO₂
