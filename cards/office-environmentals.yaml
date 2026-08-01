@@ -20,9 +20,36 @@ series:
     yaxis_id: co2
     color: "#3498db"
   - entity: sensor.leo_s_office_airgradient_sensor_pm2_5
-    name: PM2.5
-    yaxis_id: pm25
+    name: AQI
+    yaxis_id: aqi
     color: "#e74c3c"
+    unit: " "
+    transform: |
+      // US EPA PM2.5 → AQI (current breakpoints)
+      const c = Number(x);
+      if (isNaN(c)) return null;
+      // Truncate to 1 decimal place per EPA guidance
+      const pm = Math.floor(c * 10) / 10;
+
+      const breakpoints = [
+        { cLow: 0.0,   cHigh: 9.0,   iLow: 0,   iHigh: 50  },
+        { cLow: 9.1,   cHigh: 35.4,  iLow: 51,  iHigh: 100 },
+        { cLow: 35.5,  cHigh: 55.4,  iLow: 101, iHigh: 150 },
+        { cLow: 55.5,  cHigh: 125.4, iLow: 151, iHigh: 200 },
+        { cLow: 125.5, cHigh: 225.4, iLow: 201, iHigh: 300 },
+        { cLow: 225.5, cHigh: 325.4, iLow: 301, iHigh: 400 },
+        { cLow: 325.5, cHigh: 500.4, iLow: 401, iHigh: 500 }
+      ];
+
+      for (const bp of breakpoints) {
+        if (pm >= bp.cLow && pm <= bp.cHigh) {
+          return Math.round(
+            ((bp.iHigh - bp.iLow) / (bp.cHigh - bp.cLow)) * (pm - bp.cLow) + bp.iLow
+          );
+        }
+      }
+      // Above highest breakpoint
+      return 500;
   - entity: sensor.leo_s_office_airgradient_sensor_voc_index
     name: VOCs
     yaxis_id: vocs
@@ -32,10 +59,10 @@ yaxis:
     show: true
     opposite: false
     decimals: 0
-  - id: pm25
+  - id: aqi
     show: true
     opposite: false
-    decimals: 1
+    decimals: 0
   - id: vocs
     show: true
     opposite: true
