@@ -2,7 +2,7 @@ type: custom:apexcharts-card
 header:
   title: Office Environmentals
   show: true
-  show_states: false
+  show_states: true
   colorize_states: true
 graph_span: 24h
 all_series_config:
