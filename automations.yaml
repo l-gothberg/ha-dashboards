@@ -1,0 +1,100 @@
+- id: '1771613463596'
+  alias: Leo's Office Lights On
+  description: ''
+  triggers:
+  - trigger: occupancy.detected
+    target:
+      device_id: 741042ba709043fef5818491e5dcfe6c
+    options:
+      for: 00:00:00
+      behavior: first
+  conditions:
+  - condition: illuminance.is_value
+    target:
+      entity_id: sensor.lafaer_presence_sensor_gandalf_illuminance
+    options:
+      threshold:
+        type: below
+        value:
+          active_choice: number
+          number: 20
+  - condition: switch.is_off
+    target:
+      entity_id: input_boolean.sleep_focus_detection
+    options:
+      behavior: any
+      for: 00:00:00
+  actions:
+  - action: light.turn_on
+    metadata: {}
+    target:
+      device_id: a073a8b0d5ca741cf11bbbade648b7e2
+    data:
+      brightness_pct: 100
+  mode: single
+- id: '1771614254502'
+  alias: Leo's Office Lights Off
+  description: ''
+  triggers:
+  - trigger: occupancy.cleared
+    target:
+      device_id: 741042ba709043fef5818491e5dcfe6c
+    options:
+      behavior: first
+  conditions: []
+  actions:
+  - action: light.turn_off
+    metadata: {}
+    target:
+      device_id: a073a8b0d5ca741cf11bbbade648b7e2
+    data: {}
+  mode: single
+- id: '1771976972556'
+  alias: TV Bottom On
+  description: ''
+  triggers:
+  - trigger: occupancy.detected
+    target:
+      device_id: a48157045f774f1c0a85f682fefd0930
+    options:
+      behavior: each
+  conditions:
+  - condition: illuminance.is_value
+    target:
+      device_id: a48157045f774f1c0a85f682fefd0930
+    options:
+      threshold:
+        type: below
+        value:
+          active_choice: number
+          number: 25
+      behavior: any
+  actions:
+  - action: light.turn_on
+    metadata: {}
+    target:
+      device_id: 3e89bd2c39fb2b41122c2796f0f71274
+    data: {}
+  mode: single
+- id: '1771977038522'
+  alias: Living Room Off
+  description: ''
+  triggers:
+  - trigger: occupancy.cleared
+    target:
+      device_id: a48157045f774f1c0a85f682fefd0930
+    options:
+      behavior: each
+  conditions: []
+  actions:
+  - action: light.turn_off
+    metadata: {}
+    target:
+      device_id: 3e89bd2c39fb2b41122c2796f0f71274
+    data: {}
+  - action: light.turn_off
+    metadata: {}
+    target:
+      device_id: 58f5d65f7121bec36ea869ef06fe7b94
+    data: {}
+  mode: single

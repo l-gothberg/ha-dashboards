@@ -1,0 +1,30 @@
+# Loads default set of integrations. Do not remove.
+default_config:
+
+# Load frontend themes from the themes folder
+frontend:
+  themes: !include_dir_merge_named themes
+
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+
+# enable https access for HAOS
+homeassistant:
+  external_url: https://lg-haos.duckdns.org
+  internal_url: https://lg-haos.duckdns.org
+
+http:
+  ssl_certificate: /ssl/fullchain.pem
+  ssl_key: /ssl/privkey.pem
+  server_port: 8123 # Explicit is safe
+  use_x_forwarded_for: true
+  trusted_proxies:
+    - 127.0.0.1
+    - ::1
+    - 172.30.33.0/24 # HA Supervisor/Docker proxy range
+
+    # external resources
+resources:
+  - url: /local/mini-graph-card-bundle.js?v=0.13.0
+    type: module

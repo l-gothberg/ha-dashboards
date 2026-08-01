@@ -1,0 +1,40 @@
+# === From custom-cards style ===
+/node_modules/
+/.rpt2_cache/
+/dist
+/dist/**
+homeassistant/
+.yarn/
+test-*.html
+
+# === Essential for HAOS /config ===
+.HA_VERSION
+.ha_run.lock
+.storage/
+.cloud/
+tts/
+secrets.yaml
+*.db
+*.db-shm
+*.db-wal
+home-assistant.log*
+*.log
+deps/
+__pycache__/
+custom_components/
+www/community/
+
+# === SSH keys, SSL certificates, private keys & config (never commit) ===
+.ssh/
+*.pem
+*.key
+*.crt
+*.cert
+/ssl/
+ssl/
+
+# === Editor / OS ===
+.DS_Store
+._*
+.vscode/
+.idea/
