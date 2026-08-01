@@ -4,7 +4,7 @@ header:
   show: true
   show_states: true
   colorize_states: true
-graph_span: 24h
+graph_span: 4h
 all_series_config:
   stroke_width: 1
 series:
