@@ -17,8 +17,19 @@ apex_config:
   yaxis:
     - softMin: 400
       softMax: 800
-    - {}
-    - {}
+      labels:
+        style:
+          colors: "#3498db"
+    - softMin: 0
+      softMax: 100
+      labels:
+        style:
+          colors: "#e74c3c"
+    - softMin: 0
+      softMax: 500
+      labels:
+        style:
+          colors: "#f1c40f"
 series:
   - entity: sensor.leo_s_office_airgradient_sensor_carbon_dioxide
     name: CO₂
@@ -43,5 +54,5 @@ yaxis:
     decimals: 0
   - id: vocs
     show: true
-    opposite: true
+    opposite: false
     decimals: 0
