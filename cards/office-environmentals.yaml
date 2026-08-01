@@ -14,6 +14,11 @@ all_series_config:
 apex_config:
   legend:
     show: false
+  yaxis:
+    - softMin: 400
+      softMax: 800
+    - {}
+    - {}
 series:
   - entity: sensor.leo_s_office_airgradient_sensor_carbon_dioxide
     name: CO₂
