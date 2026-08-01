@@ -9,6 +9,9 @@ automation: !include automations.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml
 
+# Template sensors (Helpers defined in YAML)
+template: !include_dir_merge_list template_sensors
+
 # enable https access for HAOS
 homeassistant:
   external_url: https://lg-haos.duckdns.org
