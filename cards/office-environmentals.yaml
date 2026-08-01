@@ -6,7 +6,11 @@ header:
   colorize_states: true
 graph_span: 4h
 all_series_config:
-  stroke_width: 1
+  stroke_width: 2
+  curve: smooth
+  group_by:
+    func: avg
+    duration: 5min
 series:
   - entity: sensor.leo_s_office_airgradient_sensor_carbon_dioxide
     name: CO₂
