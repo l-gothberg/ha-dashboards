@@ -15,17 +15,32 @@ apex_config:
   legend:
     show: false
   yaxis:
-    - softMin: 400
+    - seriesName: CO₂
+      softMin: 400
       softMax: 800
       labels:
         show: false
-    - softMin: 0
+      axisBorder:
+        show: false
+      axisTicks:
+        show: false
+    - seriesName: AQI
+      softMin: 0
       softMax: 100
       labels:
         show: false
-    - softMin: 0
+      axisBorder:
+        show: false
+      axisTicks:
+        show: false
+    - seriesName: VOCs
+      softMin: 0
       softMax: 500
       labels:
+        show: false
+      axisBorder:
+        show: false
+      axisTicks:
         show: false
 series:
   - entity: sensor.leo_s_office_airgradient_sensor_carbon_dioxide
@@ -42,14 +57,14 @@ series:
     color: "#f1c40f"
 yaxis:
   - id: co2
-    show: true
+    show: false
     opposite: false
     decimals: 0
   - id: aqi
-    show: true
+    show: false
     opposite: false
     decimals: 0
   - id: vocs
-    show: true
+    show: false
     opposite: false
     decimals: 0
