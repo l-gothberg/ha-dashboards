@@ -1,0 +1,84 @@
+# Reusable apexcharts-card template for any AirGradient sensor
+#
+# Usage:
+#   1. Copy this file to cards/<location>-environmentals.yaml
+#   2. Replace all REPLACE_ME placeholders:
+#        REPLACE_ME_TITLE     → e.g. "Office Environmentals"
+#        REPLACE_ME_CO2       → sensor.<device>_carbon_dioxide
+#        REPLACE_ME_AQI       → sensor.<location>_aqi  (template sensor)
+#        REPLACE_ME_VOC       → sensor.<device>_voc_index
+#   3. Include the new card from your dashboard YAML
+#
+# Optional: also create a matching AQI template sensor (see template_sensors.yaml)
+# that combines PM2.5 + PM10 for that location.
+
+type: custom:apexcharts-card
+header:
+  title: REPLACE_ME_TITLE
+  show: true
+  show_states: true
+  colorize_states: true
+graph_span: 24h
+all_series_config:
+  stroke_width: 2
+  curve: smooth
+  group_by:
+    func: avg
+    duration: 15min
+apex_config:
+  legend:
+    show: false
+  yaxis:
+    - seriesName: CO₂
+      softMin: 400
+      softMax: 800
+      labels:
+        show: false
+      axisBorder:
+        show: false
+      axisTicks:
+        show: false
+    - seriesName: AQI
+      softMin: 0
+      softMax: 100
+      labels:
+        show: false
+      axisBorder:
+        show: false
+      axisTicks:
+        show: false
+    - seriesName: VOCs
+      softMin: 0
+      softMax: 500
+      labels:
+        show: false
+      axisBorder:
+        show: false
+      axisTicks:
+        show: false
+series:
+  - entity: sensor.REPLACE_ME_CO2
+    name: CO₂
+    yaxis_id: co2
+    color: "#3498db"
+  - entity: sensor.REPLACE_ME_AQI
+    name: AQI
+    yaxis_id: aqi
+    color: "#e74c3c"
+  - entity: sensor.REPLACE_ME_VOC
+    name: VOCs
+    yaxis_id: vocs
+    color: "#f1c40f"
+yaxis:
+  - id: co2
+    show: false
+    opposite: false
+    decimals: 0
+  - id: aqi
+    show: false
+    opposite: false
+    decimals: 0
+  - id: vocs
+    show: false
+    opposite: false
+    decimals: 0
