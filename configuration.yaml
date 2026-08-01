@@ -28,3 +28,12 @@ http:
 resources:
   - url: /local/mini-graph-card-bundle.js?v=0.13.0
     type: module
+
+lovelace:
+  dashboards:
+    main-dashboard:
+      mode: yaml
+      title: Main
+      icon: mdi:view-dashboard
+      show_in_sidebar: true
+      filename: dashboards/main.yaml
