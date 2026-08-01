@@ -11,6 +11,9 @@ all_series_config:
   group_by:
     func: avg
     duration: 15min
+apex_config:
+  legend:
+    show: false
 series:
   - entity: sensor.leo_s_office_airgradient_sensor_carbon_dioxide
     name: CO₂
