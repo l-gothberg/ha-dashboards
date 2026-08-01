@@ -10,7 +10,7 @@ all_series_config:
   curve: smooth
   group_by:
     func: avg
-    duration: 5min
+    duration: 10min
 series:
   - entity: sensor.leo_s_office_airgradient_sensor_carbon_dioxide
     name: CO₂
