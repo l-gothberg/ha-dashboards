@@ -1,0 +1,62 @@
+# Combined US EPA AQI from PM2.5 + PM10 (takes the higher of the two)
+- sensor:
+    - name: "Office AQI"
+      unique_id: office_aqi_combined
+      unit_of_measurement: "AQI"
+      state_class: measurement
+      icon: mdi:air-filter
+      state: >
+        {% set pm25_raw = states('sensor.leo_s_office_airgradient_sensor_pm2_5') %}
+        {% set pm10_raw = states('sensor.leo_s_office_airgradient_sensor_pm10') %}
+        {% set pm25 = pm25_raw | float(none) %}
+        {% set pm10 = pm10_raw | float(none) %}
+
+        {% set aqi25 = namespace %}
+        {% if pm25 is not none %}
+          {% set pm = ((pm25 * 10) | int) / 10 %}
+          {% if pm <= 9.0 %}
+            {% set aqi25 = ((50 / 9.0) * pm) | round(0) %}
+          {% elif pm <= 35.4 %}
+            {% set aqi25 = ((49 / 26.3) * (pm - 9.1) + 51) | round(0) %}
+          {% elif pm <= 55.4 %}
+            {% set aqi25 = ((49 / 19.9) * (pm - 35.5) + 101) | round(0) %}
+          {% elif pm <= 125.4 %}
+            {% set aqi25 = ((49 / 69.9) * (pm - 55.5) + 151) | round(0) %}
+          {% elif pm <= 225.4 %}
+            {% set aqi25 = ((99 / 99.9) * (pm - 125.5) + 201) | round(0) %}
+          {% elif pm <= 325.4 %}
+            {% set aqi25 = ((99 / 99.9) * (pm - 225.5) + 301) | round(0) %}
+          {% elif pm <= 500.4 %}
+            {% set aqi25 = ((99 / 174.9) * (pm - 325.5) + 401) | round(0) %}
+          {% else %}
+            {% set aqi25 = 500 %}
+          {% endif %}
+        {% endif %}
+
+        {% set aqi10 = namespace %}
+        {% if pm10 is not none %}
+          {% set pm = pm10 | int %}
+          {% if pm <= 54 %}
+            {% set aqi10 = ((50 / 54) * pm) | round(0) %}
+          {% elif pm <= 154 %}
+            {% set aqi10 = ((49 / 99) * (pm - 55) + 51) | round(0) %}
+          {% elif pm <= 254 %}
+            {% set aqi10 = ((49 / 99) * (pm - 155) + 101) | round(0) %}
+          {% elif pm <= 354 %}
+            {% set aqi10 = ((49 / 99) * (pm - 255) + 151) | round(0) %}
+          {% elif pm <= 424 %}
+            {% set aqi10 = ((99 / 69) * (pm - 355) + 201) | round(0) %}
+          {% elif pm <= 504 %}
+            {% set aqi10 = ((99 / 79) * (pm - 425) + 301) | round(0) %}
+          {% elif pm <= 604 %}
+            {% set aqi10 = ((99 / 99) * (pm - 505) + 401) | round(0) %}
+          {% else %}
+            {% set aqi10 = 500 %}
+          {% endif %}
+        {% endif %}
+
+        {% if aqi25 is none and aqi10 is none %}
+          unknown
+        {% else %}
+          {{ [aqi25 | default(0), aqi10 | default(0)] | max }}
+        {% endif %}
