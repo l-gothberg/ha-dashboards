@@ -4,3 +4,12 @@ views:
     path: home
     cards:
       - !include ../cards/office-environmentals.yaml
+
+      - type: button
+        name: Restart Home Assistant
+        icon: mdi:restart
+        tap_action:
+          action: call-service
+          service: homeassistant.restart
+          confirmation:
+            text: Are you sure you want to restart Home Assistant?
