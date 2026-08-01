@@ -1,0 +1,6 @@
+title: Main
+views:
+  - title: Home
+    path: home
+    cards:
+      - !include ../cards/office-environmentals.yaml

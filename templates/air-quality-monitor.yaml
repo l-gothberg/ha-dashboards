@@ -1,0 +1,27 @@
+# Template for any AirGradient (or similar) air-quality monitor
+# Usage: copy this file and replace the entity IDs + name/icon
+
+type: custom:mini-graph-card
+name: REPLACE_ME Environmentals
+icon: mdi:air-filter
+hours_to_show: 24
+points_per_hour: 4
+line_width: 2
+animate: true
+show:
+  name: true
+  icon: true
+  state: true
+  legend: true
+  fill: fade
+entities:
+  - entity: sensor.REPLACE_ME_carbon_dioxide
+    name: CO₂
+    color: "#3498db"
+  - entity: sensor.REPLACE_ME_pm2_5
+    name: PM2.5
+    color: "#e74c3c"
+  # Add more sensors as needed
+  # - entity: sensor.REPLACE_ME_pm10
+  #   name: PM10
+  #   color: '#e67e22'

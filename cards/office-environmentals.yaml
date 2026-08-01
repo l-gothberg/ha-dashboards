@@ -1,0 +1,24 @@
+type: custom:mini-graph-card
+name: Office Environmentals
+icon: mdi:office-building
+hours_to_show: 24
+points_per_hour: 4
+line_width: 2
+animate: true
+show:
+  name: true
+  icon: true
+  state: true
+  legend: true
+  fill: fade
+entities:
+  - entity: sensor.leo_s_office_airgradient_sensor_carbon_dioxide
+    name: CO₂
+    color: "#3498db" # blue
+  - entity: sensor.leo_s_office_airgradient_sensor_pm2_5
+    name: PM2.5
+    color: "#e74c3c" # red
+  - entity: sensor.i_9psl_display_brightness
+    name: Display Brightness
+    color: "#f1c40f" # yellow
+    y_axis: secondary # keeps the scale readable
